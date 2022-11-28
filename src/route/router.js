@@ -4,5 +4,5 @@ const {creatUser,loginUser}=require("../controllers/usercontroller")
 
 
 router.post("/start",creatUser)
-router.post("/get",loginUser)
+router.get("/get",loginUser)
 module.exports = router;
