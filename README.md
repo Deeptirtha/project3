@@ -106,11 +106,10 @@ Return the updated book document with reviews data on successful operation. The 
 Check if the review exist with the reviewId. Check if the book exist with the bookId. Send an error response with appropirate status code like this if the book or book review does not exist
 Delete the related reivew.
 Update the books document - decrease review count by one
+
 ## Authentication
 Make sure all the book routes are protected.
-## Authentication
-Make sure all the book routes are protected.
-Authorisation
+## Authorisation
 Make sure that only the owner of the books is able to create, edit or delete the book.
 In case of unauthorized access return an appropirate error message.
 ## Testing
