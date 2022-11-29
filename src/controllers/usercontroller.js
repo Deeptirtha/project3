@@ -123,7 +123,7 @@ const loginUser = async function (req, res) {
       return res.status(404).send({ status: false, msg: "no user found" });
     }
     let token = jwt.sign({ ID: user._id }, "project3-group9", {
-      expiresIn: "1h",
+      expiresIn: "10h",
     });
     res.status(200).send({ status: true, message: token });
   } catch (err) {

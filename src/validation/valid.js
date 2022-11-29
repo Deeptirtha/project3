@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 let validname = /[0-9]+/
 
 const validName=function(name){
@@ -46,6 +48,9 @@ const ValidISBN = function (ISBN) {
     const regexcategory =/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))+$/;
       return regexcategory.test(releasedAt);
   };
+//<---------------------------Validations :  ObjectId------------------------------->//
+const ValidObjectId = function (objectId) {
+  return mongoose.Types.ObjectId.isValid(objectId);
+};
 
-
-module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime,validTitleBooks}
+module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime,validTitleBooks,ValidObjectId }
