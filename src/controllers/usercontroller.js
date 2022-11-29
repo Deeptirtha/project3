@@ -1,7 +1,8 @@
-const UserModel = require("../models/usermodel");
+const UserModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const {validname,validEmail,validMobile,validPass,validpincode,validTitle} = require("../validation/valid");
-let creatUser = async function (req, res) {
+
+let createUser = async function (req, res) {
   try {
     let data = req.body;
     let address = data.address;
@@ -130,4 +131,5 @@ const loginUser = async function (req, res) {
     res.status(500).send({ status: false, msg: err.message });
   }
 };
-module.exports = { creatUser, loginUser };
+
+module.exports = { createUser, loginUser };

@@ -1,14 +1,13 @@
 const express = require("express");
-const route = require("./route/router.js");
+const route = require("./routes/router.js");
 const mongoose = require("mongoose");
 const app = express();
+
 app.use(express.json());
 
-mongoose
-  .connect(
-    "mongodb+srv://DeeptirthaMukherjee:QYKI3k8QSKC4I7FZ@cluster1.khatgm1.mongodb.net/project3-db?retryWrites=true&w=majority",
-    { UseNewUrlParser: true }
-  )
+mongoose.connect("mongodb+srv://DeeptirthaMukherjee:QYKI3k8QSKC4I7FZ@cluster1.khatgm1.mongodb.net/project3-db?retryWrites=true&w=majority",
+    { UseNewUrlParser: true })
+
   .then(() => console.log("Mongo-Db is connected"))
   .catch((err) => console.log(err.message));
 

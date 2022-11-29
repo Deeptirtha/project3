@@ -1,5 +1,5 @@
-const bookModel = require("../models/bookmodel");
-const userModel = require("../models/usermodel.js");
+const bookModel = require("../models/bookModel");
+const userModel = require("../models/userModel.js");
 const mongoose = require("mongoose");
 const validator = require("../validation/valid")
 const { isValidObjectId } = require("mongoose")
