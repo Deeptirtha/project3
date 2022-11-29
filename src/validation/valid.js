@@ -14,9 +14,10 @@ let validMobile=/^[0]?[6789]\d{9}$/
 let validPass=/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
 
 let validpincode=/^(\d{4}|\d{6})$/
+
 //<---------------------------Validations :  Title------------------------------->//
 const validTitle = (Title) => {
-    let correctTitle = ["Mr", "Mrs", "Miss"];
+let correctTitle = ["Mr", "Mrs", "Miss"];
     if (correctTitle.includes(Title)) {
       return false
     } else {
@@ -46,11 +47,19 @@ const ValidISBN = function (ISBN) {
    //<---------------------------Validations :  Time -------------------------->//
    const validTime = function (releasedAt) {
     const regexcategory =/^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))+$/;
-      return regexcategory.test(releasedAt);
+      return regexcategory.test(releasedAt)
   };
 //<---------------------------Validations :  ObjectId------------------------------->//
 const ValidObjectId = function (objectId) {
   return mongoose.Types.ObjectId.isValid(objectId);
-};
+}
+//============================================================Validations :  string======================================
+const validString = (String) => {
+  if (/\d/.test(String)) {
+    return true
+  } else {
+    return false;
+  }
+}
 
-module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime,validTitleBooks,ValidObjectId }
+module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime,validTitleBooks,ValidObjectId,validString }

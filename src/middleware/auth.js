@@ -14,8 +14,8 @@ const authentication = (req, res, next) => {
     req.decodedToken = decodedToken;
     next();
   } catch (err) {
-    if(err.message == "jwt expired") return res.status(400).send({ status: false, message: "JWT expired, login again" })
-    if(err.message == "invalid signature") return res.status(400).send({ status: false, message: "Token is incorrect" })
+    if(err.message == "jwt expired") return res.status(401).send({ status: false, message: "JWT expired, login again" })
+    if(err.message == "invalid signature") return res.status(401).send({ status: false, message: "Token is incorrect" })
     res.status(500).send({ status: false, error: err.message })
   }
 }
@@ -29,13 +29,13 @@ const authorization = async (req, res, next) => {
     if (req.body.hasOwnProperty('userId')) {
       if (!isValidObjectId(req.body.userId)) return res.status(400).send({ status: false, message: "Enter a valid user id" })
       let userData = await userModel.findById(req.body.userId)
-      if (!userData) return res.status(404).send({ status: false, message: "Error! Please check user id and try again" })
+      if (!userData) return res.status(400).send({ status: false, message: "Error! Please check user id and try again" })
       userLogging = userData._id.toString()
     }
     if (req.params.hasOwnProperty('bookId')) {
       if (!isValidObjectId(req.params.bookId)) return res.status(400).send({ status: false, message: "Enter a valid book id" })
       let bookData = await bookModel.findById(req.params.bookId);
-      if (!bookData) return res.status(404).send({ status: false, message: "Error! Please check book id and try again" })
+      if (!bookData) return res.status(400).send({ status: false, message: "Error! Please check book id and try again" })
       userLogging = bookData.userId.toString();
     }
 
