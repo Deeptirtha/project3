@@ -12,7 +12,7 @@ let validMobile=/^[0]?[6789]\d{9}$/
 let validPass=/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
 
 let validpincode=/^(\d{4}|\d{6})$/
-
+//<---------------------------Validations :  Title------------------------------->//
 const validTitle = (Title) => {
     let correctTitle = ["Mr", "Mrs", "Miss"];
     if (correctTitle.includes(Title)) {
@@ -22,11 +22,18 @@ const validTitle = (Title) => {
     }
   }
 
+
+//<--------------------------Validations : Title Books------------------------->//
+const validTitleBooks=function(title){
+  const regexTittle=/^[a-zA-Z ]{5,}[a-zA-z0-9]+$/;
+  return regexTittle.test(title)
+}
+
 //<---------------------------Validations :  ISBN------------------------------->//
 const ValidISBN = function (ISBN) {
-    const regexISBN =/^[0-9-]+$/;
-      return regexISBN.test(ISBN);
-  };
+  const regexISBN =/^(?=(?:\D*\d){10}(?:(?:\D*\d){3})?$)[\d-]+$/;
+    return regexISBN.test(ISBN);
+};
   
    //<---------------------------Validations :  category -------------------------->//
    const validcategory = function (category) {
@@ -41,4 +48,4 @@ const ValidISBN = function (ISBN) {
   };
 
 
-module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime}
+module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime,validTitleBooks}
