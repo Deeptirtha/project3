@@ -55,11 +55,13 @@ const ValidObjectId = function (objectId) {
 }
 //============================================================Validations :  string======================================
 const validString = (String) => {
-  if (/\d/.test(String)) {
-    return true
-  } else {
-    return false;
-  }
+  const regexName=/^[a-zA-Z ]+$/;
+  return regexName.test(String)
+}
+//================================================================Number========================================================
+function IsNumeric(input){
+  var RE = /^-{0,1}\d*\.{0,1}\d+$/;
+  return (RE.test(input));
 }
 
-module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime,validTitleBooks,ValidObjectId,validString }
+module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime,validTitleBooks,ValidObjectId,validString,IsNumeric }

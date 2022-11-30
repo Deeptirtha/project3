@@ -124,7 +124,7 @@ const updatedocutment = async function (req, res) {
 
 
       let alert = await bookModel.findOne({ _id: bookId, isDeleted: true })
-      if (alert) return res.status(400).send({ msg: "Blog already deleted" })
+      if (alert) return res.status(400).send({ msg: "Book already deleted" })
 
       if (isDeleted) return res.status(400).send({ satus: false, message: "you can't delete data" })
 
@@ -159,7 +159,7 @@ const deleteBookById = async function (req, res) {
       if(!isValidObjectId(bookId)){return res.status(400).send({status:false,msg:"please provide a valid book id"})}
       let book=await bookModel.findOne({_id:bookId,isDeleted:false})
       if(!book){return res.status(400).send({status:false,msg:"no book found or book already deleted"})}
-      let DeleteBook=await bookModel.updateOne({ _id: bookId }, { isDeleted: true ,deletedAt: Date.now()});
+      let DeleteBook=await bookModel.updateOne({ _id: bookId }, { isDeleted: true ,deletedAt: Date.now(),reviews:0});
    
     res.status(200).send({status: true, message: "Book deleted successfully"});
   }

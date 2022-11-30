@@ -55,7 +55,7 @@ const loginUser = async function (req, res) {
     let user = await UserModel.findOne({$or: [{ email: data.email, password: data.password },{ phone: data.phone, password: data.password }]});
 
     if (!user) {return res.status(404).send({ status: false, msg: "no user found" })}
-    let token = jwt.sign({ ID: user._id }, "project3-group9", {expiresIn: "10h"});
+    let token = jwt.sign({ ID: user._id }, "project3-group9", {expiresIn: "10d"});
     res.status(200).send({ status: true, message: token })}
      catch (err) {
     res.status(500).send({ status: false, msg: err.message })}
