@@ -2,6 +2,8 @@ const reviedModel = require('../models/reviedmodel');
 const bookModel = require('../models/bookmodel');
 const {validString,ValidObjectId,validTime,IsNumeric} = require('../validation/valid');
 
+
+//===================================================================creat-review===================================================
 const addReview = async (req, res) => {
   try {
     let bookId = req.params.bookId;
@@ -50,7 +52,7 @@ const addReview = async (req, res) => {
     res.status(500).send({ status: false, error: err.message });
   }
 }
-//===================================================================review-update===================================================
+//===================================================================update-review===================================================
 
 const updeteRewvied = async function(req,res){
   try{
@@ -102,8 +104,7 @@ catch(err){
   res.status(500).send({status: false, error: err.message }) 
 }}
 
-
-
+//===================================================================Delete-review=====================================================
 const deleteReviewById = async function (req,res){
   try{
       let reviewId = req.params.reviewId
