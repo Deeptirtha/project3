@@ -42,7 +42,7 @@ let creatUser = async function (req, res) {
     let oldUser = await UserModel.findOne({$or: [{ phone: data.phone }, { email: data.email }]})
     if (oldUser) {return res.status(400).send({status: false,message: "User already exist with this phone no or email Id"})}
     let user = await UserModel.create(data);
-    res.status(201).send({ status: true, msg: user })} 
+    res.status(201).send({ status: true, msg: "User created successfully",data:user })} 
     catch (err) {
     res.status(500).send({ status: false, msg: err.message });
    }

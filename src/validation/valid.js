@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 let validname = /[0-9]+/
 
+//================================================================valid-name===========================================
 const validName=function(name){
   const regexName=/^[a-zA-Z ]+$/;
   return regexName.test(name)
