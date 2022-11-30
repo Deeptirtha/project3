@@ -13,7 +13,8 @@ let validMobile=/^[0]?[6789]\d{9}$/
 
 let validPass=/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
 
-let validpincode=/^(\d{4}|\d{6})$/
+let validpincode=/^[1-9]{1}[0-9]{5}$/
+
 
 //<---------------------------Validations :  Title------------------------------->//
 const validTitle = (Title) => {

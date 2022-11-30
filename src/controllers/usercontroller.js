@@ -27,9 +27,14 @@ let creatUser = async function (req, res) {
 
     if (address) {if (Object.keys(address).length == 0) {return res.status(400).send({ status: true, msg: "address can't be empty" })}
 
-    if (!address.street) {return res.status(400).send({status: false,message: "street key is mandatory in your address "})}
+    let arr=["street","city","pincode"]
+    for(i of arr){
+      if (!address[i])return res.status(400).send({status:false,msg:`${i} is not present inside your address`})
+      address[i]=address[i].trim()
+  }
+    if (!address.street) {return res.status(400).send({status: false,message: "street can't be empty in your address "})}
 
-    if (!address.city) {return res.status(400).send({status: false,message: "city key is mandatory in your address "})}
+    if (!address.city) {return res.status(400).send({status: false,message: "city can't be empty in your address  "})}
 
     if (!address.pincode ||!validpincode.test(address.pincode.trim())) {return res.status(400).send({ status: false, message: "please input valid pincode " }) }
     }
@@ -48,7 +53,8 @@ let creatUser = async function (req, res) {
 const loginUser = async function (req, res) {
   try {
     let data = req.body;
-    if (Object.keys(data).length == 0) {return res.status(400).send({ status: false, message: "Body is empty can't find data" })}
+    if (Object.keys(data).length == 0 ) {return res.status(400).send({ status: false, message: "Body is empty can't find data" })}
+    if (data.hasOwnProperty("email") && data.hasOwnProperty("phone") ) {return res.status(400).send({ status: false, message: "please provide any one between email and phone no" })}
     if (!data.hasOwnProperty("email")) {
       if (!data.hasOwnProperty("phone")) {return res.status(400).send({status: false,message: "please enter mobile no or email id to login"})}}
     if (!data.hasOwnProperty("password")) {return res.status(400).send({ status: false, message: "please enter password to login" })}
