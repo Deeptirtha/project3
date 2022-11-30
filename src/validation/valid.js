@@ -2,10 +2,7 @@ const mongoose = require("mongoose");
 
 let validname = /[0-9]+/
 
-const validName=function(name){
-  const regexName=/^[a-zA-Z ]+$/;
-  return regexName.test(name)
-}
+
 
 let validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
@@ -15,17 +12,20 @@ let validPass=/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
 
 let validpincode=/^(\d{4}|\d{6})$/
 
+//<---------------------------Validations :  Name------------------------------->//
+
+const validName=function(name){
+  const regexName=/^[a-zA-Z ]+$/;
+  return regexName.test(name)
+}
+
 //<---------------------------Validations :  Title------------------------------->//
 const validTitle = (Title) => {
 let correctTitle = ["Mr", "Mrs", "Miss"];
-    if (correctTitle.includes(Title)) {
-      return false
-    } else {
-      return true;
-    }
+    if (correctTitle.includes(Title)) return false 
+      else return true;
   }
-
-
+  
 //<--------------------------Validations : Title Books------------------------->//
 const validTitleBooks=function(title){
   const regexTittle=/^[a-zA-Z ]{5,}[a-zA-z0-9]+$/;
@@ -43,6 +43,12 @@ const ValidISBN = function (ISBN) {
     const regexcategory =/[a-zA-z]/;
       return regexcategory.test(category);
   };
+
+  //<---------------------------Validations :  ObjectId------------------------------->//
+  const validString = function (String) {
+    const regexString =/\d/;
+      return regexString.test(String);
+  };
     
    //<---------------------------Validations :  Time -------------------------->//
    const validTime = function (releasedAt) {
@@ -53,13 +59,6 @@ const ValidISBN = function (ISBN) {
 const ValidObjectId = function (objectId) {
   return mongoose.Types.ObjectId.isValid(objectId);
 }
-//============================================================Validations :  string======================================
-const validString = (String) => {
-  if (/\d/.test(String)) {
-    return true
-  } else {
-    return false;
-  }
-}
+
 
 module.exports = { validName,validname,validEmail,validMobile, validPass, validpincode,validTitle,ValidISBN,validcategory,validTime,validTitleBooks,ValidObjectId,validString }
