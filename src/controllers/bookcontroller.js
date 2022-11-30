@@ -166,8 +166,9 @@ const deleteBookById = async function (req, res) {
       if(!isValidObjectId(bookId)){return res.status(400).send({status:false,msg:"please provide a valid book id"})}
       let book=await bookModel.findOne({_id:bookId,isDeleted:false})
       if(!book){return res.status(400).send({status:false,msg:"no book found or book already deleted"})}
-      let DeleteBook=await bookModel.updateOne({ _id: bookId }, { isDeleted: true ,deletedAt: Date.now(),reviews:0});
-   
+      await bookModel.updateOne({ _id: bookId }, { isDeleted: true ,deletedAt: Date.now(),reviews:0});
+
+     // await reviedModel.updateMany({bookId:bookId},{isDeleted :true, deletedAt : Date.now()})
     res.status(200).send({status: true, message: "Book deleted successfully"});
   }
   catch (err) {

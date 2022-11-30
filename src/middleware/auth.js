@@ -15,7 +15,7 @@ const authentication = (req, res, next) => {
     next();
   } catch (err) {
     if(err.message == "jwt expired") return res.status(401).send({ status: false, message: "JWT expired, login again" })
-    if(err.message == "invalid signature") return res.status(401).send({ status: false, message: "Token is incorrect" })
+    if(err.message == "invalid signature") return res.status(401).send({ status: false, message: "Token is incorrect authentication failed" })
     res.status(500).send({ status: false, error: err.message })
   }
 }
