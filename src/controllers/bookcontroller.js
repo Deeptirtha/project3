@@ -1,6 +1,6 @@
 const bookModel = require("../models/bookmodel");
 const userModel = require("../models/usermodel.js");
-let reviedModel=require("../models/reviedmodel")
+let reviedModel=require("../models/reviedModel")
 const mongoose = require("mongoose");
 const validator = require("../validation/valid")
 const { isValidObjectId } = require("mongoose")

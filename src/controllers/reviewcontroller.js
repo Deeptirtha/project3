@@ -1,4 +1,4 @@
-const reviedModel = require('../models/reviedmodel');
+const reviedModel = require('../models/reviedModel');
 const bookModel = require('../models/bookmodel');
 const {validString,ValidObjectId,validTime} = require('../validation/valid');
 

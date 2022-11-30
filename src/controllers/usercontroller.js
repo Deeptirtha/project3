@@ -4,7 +4,7 @@ const {
   validname,validEmail,validMobile,validPass,validpincode,validTitle} = require("../validation/valid");
 
 //========================================================creating-user===================================================//
-let creatUser = async function (req, res) {
+let createUser = async function (req, res) {
   try {
     let data = req.body;
     let address = data.address;
@@ -60,4 +60,4 @@ const loginUser = async function (req, res) {
      catch (err) {
     res.status(500).send({ status: false, msg: err.message })}
 };
-module.exports = { creatUser, loginUser };
+module.exports = { createUser, loginUser };

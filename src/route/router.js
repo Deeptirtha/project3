@@ -1,26 +1,23 @@
 const express=require("express")
 const router=express.Router()
-const {creatUser,loginUser}=require("../controllers/usercontroller")
+const {createUser,loginUser}=require("../controllers/usercontroller")
 const {createBooks,getBookData, getBookById, deleteBookById,updatedocutment}=require("../controllers/bookcontroller")
 const {addReview}= require("../controllers/reviewcontroller")
 const  { authentication, authorization }=require("../middleware/auth")
 
-//=====================================================User========================================================================
-router.post("/register",creatUser)
-
+//<---------------------------API : RegisterUser------------------------->//
+router.post("/register",createUser)
+//<---------------------------API : Login-------------------------------->//
 router.post("/login",loginUser) 
-//=====================================================Book========================================================================
-router.post("/books", authentication, authorization,createBooks)
-
+//<---------------------------API : GetBook------------------------------>//
 router.get("/books",authentication,getBookData)
-
+//<---------------------------API : UpdateBook--------------------------->//
 router.put("/books/:bookId",authentication,authorization,updatedocutment)
-
+//<---------------------------API : GetBookWithBookId-------------------->//
 router.get("/books/:bookId",authentication,getBookById)
-
+//<---------------------------API : DeleteBookWithBookId----------------->//
 router.delete("/books/:bookId",authentication,deleteBookById)
-
-//=====================================================Book========================================================================
+//<---------------------------API : UpdateReviewWithBookId--------------->//
 router.post("/books/:bookId/review",addReview)
 
 
