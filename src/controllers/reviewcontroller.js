@@ -17,7 +17,7 @@ const addReview = async (req, res) => {
     let data = req.body;
   let {rating,reviewedAt}=data
 
-  if(Object.keys(data).length==0) return res.status(400).send({ status: false, message: "Details required to add review to the book" })
+  if(Object.keys(data).length==0) return res.status(400).send({ status: false, message: "Details required to add review for the book" })
    
 
     if(data.hasOwnProperty("reviewedAt")){
@@ -71,7 +71,7 @@ const updeteRewvied = async function(req,res){
    if(!review){return res.status(404).send({status : false, Msg :"Review Not found or already deleted"})}
 
    let data=req.body
-
+   if(Object.keys(data).length==0) return res.status(400).send({ status: false, message: "Details required to update review" })
   for(i in data){
     if(i=='rating'){continue}
        data[i]=data[i].trim()
@@ -94,9 +94,7 @@ if((data.rating > 5 ) || (data.rating < 1)) return res.status(400).send({ status
 
 if(!IsNumeric(data.rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}
 
- await reviedModel.updateOne({_id : reviewId,bookId:bookId},data)
- let updatedReview= await reviedModel.findOne({_id :reviewId,bookId:bookId})
-
+let updatedReview=await reviedModel.findOneAndUpdate({_id : reviewId,bookId:bookId},data)
 
    res.status(200).send({status:true,msg:"review updated successfully",data:updatedReview})        
 
