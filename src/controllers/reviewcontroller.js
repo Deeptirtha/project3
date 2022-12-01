@@ -18,12 +18,11 @@ const addReview = async (req, res) => {
   let {rating,reviewedAt}=data
 
   if(Object.keys(data).length==0) return res.status(400).send({ status: false, message: "Details required to add review to the book" })
+   
 
-    if(!reviewedAt)return res.status(400).send({ status: false, message: "reviewedAt is  mandatory to creat the data" })
     if(data.hasOwnProperty("reviewedAt")){
-      data.reviewedAt= data.reviewedAt.trim()
-      if (!validTime(data.reviewedAt)) return res.status(400).send({ status: false, message: "Please enter reviewedAt in the right format(YYYY-MM-DD)!" })
-    }
+     return  res.status(400).send({ status: false, message: "you cant change the date manually app bhagwan banne ki kosish na kare " })
+  }
     if(data.hasOwnProperty("reviewedBy")){
       data.reviewedBy=data.reviewedBy.trim()
       if(!validString(data.reviewedBy)) return res.status(400).send({ status: false, message: "Enter valid data in reviewedBy" })
@@ -66,14 +65,15 @@ const updeteRewvied = async function(req,res){
    if(!ValidObjectId(bookId)){return res.status(400).send({status : false, Msg : "Enter Valid ObjectId for the book"})}
 
    let book=await bookModel.findOne({_id :bookId, isDeleted : false})
-     if(!book){return res.status(400).send({status:false,msg:"Book not found or already deleted"})}
+     if(!book){return res.status(404).send({status:false,msg:"Book not found or already deleted"})}
 
    let review = await reviedModel.findOne({_id :reviewId,bookId:bookId, isDeleted : false})
-   if(!review){return res.status(400).send({status : false, Msg :"Review Not found or already deleted"})}
+   if(!review){return res.status(404).send({status : false, Msg :"Review Not found or already deleted"})}
 
    let data=req.body
 
   for(i in data){
+    if(i=='rating'){continue}
        data[i]=data[i].trim()
        if(!data[i]){return res.status(400).send({status:false,msg:`${i} can't be empty`})}
   }
@@ -117,10 +117,10 @@ const deleteReviewById = async function (req,res){
        if(!ValidObjectId(bookId)){return res.status(400).send({status : false, Msg : "Enter Valid ObjectId for the book"})}
 
        let book=await bookModel.findOne({_id :bookId, isDeleted : false})
-         if(!book){return res.status(400).send({status:false,msg:"Book not found or already deleted"})}
+         if(!book){return res.status(404).send({status:false,msg:"Book not found or already deleted"})}
 
        let review = await reviedModel.findOne({_id :reviewId,bookId:bookId, isDeleted : false})
-       if(!review){return res.status(400).send({status : false, Msg :"Review Not found or already deleted"})}
+       if(!review){return res.status(404).send({status : false, Msg :"Review Not found or already deleted"})}
 
       await reviedModel.updateOne({_id : reviewId,bookId:bookId},{isDeleted :true, deletedAt : Date.now()})
       await bookModel.updateOne({_id: bookId},{$inc: {reviews: -1}})

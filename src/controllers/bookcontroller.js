@@ -91,7 +91,7 @@ let getBookById= async function(req,res){
     let bookId=req.params.bookId
     if(!isValidObjectId(bookId)){return res.status(400).send({status:false,msg:"please provide a valid book id"})}
     let book=await bookModel.findOne({_id:bookId,isDeleted:false}).lean()
-    if(!book){return res.status(400).send({status:false,msg:"no book found or book already deleted"})}
+    if(!book){return res.status(404).send({status:false,msg:"no book found or book already deleted"})}
     let reviews=await reviedModel.find({bookId:req.params.bookId}).select({bookId:1, reviewedBy:1, reviewedAt:1, rating:1, review:1})
     book.reviewsData=reviews
     res.status(400).send({status:true,msg:book})
@@ -132,7 +132,7 @@ const updatedocutment = async function (req, res) {
     }
 
     let alert = await bookModel.findOne({ _id: bookId, isDeleted: true })
-    if (alert) return res.status(400).send({ msg: "Book already deleted" })
+    if (alert) return res.status(404).send({ msg: "Book not found or already deleted" })
 
     if (isDeleted) return res.status(400).send({ satus: false, message: "you can't delete data" })
 
@@ -165,7 +165,7 @@ const deleteBookById = async function (req, res) {
       const bookId = req.params.bookId
       if(!isValidObjectId(bookId)){return res.status(400).send({status:false,msg:"please provide a valid book id"})}
       let book=await bookModel.findOne({_id:bookId,isDeleted:false})
-      if(!book){return res.status(400).send({status:false,msg:"no book found or book already deleted"})}
+      if(!book){return res.status(404).send({status:false,msg:"No book found or book already deleted"})}
       await bookModel.updateOne({ _id: bookId }, { isDeleted: true ,deletedAt: Date.now(),reviews:0});
 
      // await reviedModel.updateMany({bookId:bookId},{isDeleted :true, deletedAt : Date.now()})
