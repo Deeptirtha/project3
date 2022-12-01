@@ -15,10 +15,11 @@ const addReview = async (req, res) => {
     if(!checkBookId) return res.status(404).send({ status: false, message: "Book not found or already been deleted" });
 
     let data = req.body;
-  let {rating,review}=data
+  let {rating,reviewedAt}=data
 
   if(Object.keys(data).length==0) return res.status(400).send({ status: false, message: "Details required to add review to the book" })
 
+    if(!reviewedAt)return res.status(400).send({ status: false, message: "reviewedAt is  mandatory to creat the data" })
     if(data.hasOwnProperty("reviewedAt")){
       data.reviewedAt= data.reviewedAt.trim()
       if (!validTime(data.reviewedAt)) return res.status(400).send({ status: false, message: "Please enter reviewedAt in the right format(YYYY-MM-DD)!" })
@@ -29,11 +30,11 @@ const addReview = async (req, res) => {
     }
     if(!rating) return res.status(400).send({ status: false, message: "Rating is required and should not be 0" })
 
-    if(!review)return res.status(400).send({ status: false, message: "review is required" })
+    if(data.hasOwnProperty("review")){
     data.review= data.review.trim()
     if (!validString(data.review)) {
       return res.status(400).send({ status: false, message: "Enter valid data in review" })
-    }
+    }}
     if((rating > 5 ) || (rating < 1)) return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 numbers" });
 
     if(!IsNumeric(rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}
