@@ -8,6 +8,7 @@ let creatUser = async function (req, res) {
   try {
     let data = req.body;
     let address = data.address;
+    
     if (Object.keys(data).length == 0) {return res.status(400).send({ status: false, message: "Body is empty can't craeate data" })}
     let newarr = ["name", "title", "email", "phone", "password"];
     for (field of newarr) {
@@ -25,9 +26,10 @@ let creatUser = async function (req, res) {
 
     if (!data.password.trim() || !validPass.test(data.password)) { return res.status(400).send({status: false,message:"Password should be in-between 8-15 characters and must contain one of 0-9,A-Z,a-z and special character"})}
 
-    if (address) {if (Object.keys(address).length == 0) {return res.status(400).send({ status: true, msg: "address can't be empty" })}
+    if (address) {
+      if (typeof(address)!== "object" ||typeof(address)== "string") {return res.status(400).send({ status: true, msg: "please put address in object formate" })}
 
-    if (typeof(address)!= Object) {return res.status(400).send({ status: true, msg: "address can't be string" })}
+      if (Object.keys(address).length == 0) {return res.status(400).send({ status: true, msg: "address can't be empty" })}
 
     let arr=["street","city","pincode"]
     for(i of arr){
