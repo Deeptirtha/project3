@@ -16,6 +16,7 @@ let validPass=/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
 let validpincode=/^[1-9]{1}[0-9]{5}$/
 
 let validname = /[0-9]+/
+
 //=========================================================Validations :  Title===================================================
 const validTitle = (Title) => {
 let correctTitle = ["Mr", "Mrs", "Miss"];
@@ -29,7 +30,7 @@ let correctTitle = ["Mr", "Mrs", "Miss"];
 
 //=============================================Validations : Title Books=========================================================
 const validTitleBooks=function(title){
-  const regexTittle=/^[a-zA-Z ]{5,}[a-zA-z0-9]+$/;
+  const regexTittle=/^[a-zA-Z ]{5,}|[a-zA-z0-9]+$/;
   return regexTittle.test(title)
 }
 

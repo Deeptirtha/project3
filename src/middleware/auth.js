@@ -27,6 +27,7 @@ const authorization = async (req, res, next) => {
     let userLogging
 
     if (req.body.hasOwnProperty('userId')) {
+      req.body.userId=req.body.userId.trim()
       if (!isValidObjectId(req.body.userId)) return res.status(400).send({ status: false, message: "Enter a valid user id" })
       let userData = await userModel.findById(req.body.userId)
       if (!userData) return res.status(400).send({ status: false, message: "Error! Please check user id and try again" })

@@ -31,7 +31,7 @@ const addReview = async (req, res) => {
 
     if(data.hasOwnProperty("review")){
     data.review= data.review.trim()
-    if (!validString(data.review)) {
+    if (!(data.review)) {
       return res.status(400).send({ status: false, message: "Enter valid data in review" })
     }}
     if((rating > 5 ) || (rating < 1)) return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 numbers" });
@@ -94,7 +94,7 @@ if((data.rating > 5 ) || (data.rating < 1)) return res.status(400).send({ status
 
 if(!IsNumeric(data.rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}
 
-let updatedReview=await reviedModel.findOneAndUpdate({_id : reviewId,bookId:bookId},data)
+let updatedReview=await reviedModel.findOneAndUpdate({_id : reviewId,bookId:bookId},data, {new:true})
 
    res.status(200).send({status:true,msg:"review updated successfully",data:updatedReview})        
 

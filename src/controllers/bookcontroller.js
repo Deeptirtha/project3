@@ -136,9 +136,6 @@ const updatedocutment = async function (req, res) {
 
     if (isDeleted) return res.status(400).send({ satus: false, message: "you can't delete data" })
 
-    if (userId) return res.status(400).send({ satus: false, message: "you can't change userId" })
-
-
     if (reviews) return res.status(400).send({ satus: false, message: "you can't change reviews" })
 
     let presetISBN = await bookModel.findOne({ ISBN: ISBN })
