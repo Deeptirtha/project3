@@ -27,6 +27,8 @@ let creatUser = async function (req, res) {
 
     if (address) {if (Object.keys(address).length == 0) {return res.status(400).send({ status: true, msg: "address can't be empty" })}
 
+    if (typeof(address)!= Object) {return res.status(400).send({ status: true, msg: "address can't be string" })}
+
     let arr=["street","city","pincode"]
     for(i of arr){
       if (!address[i])return res.status(400).send({status:false,msg:`${i} is not present inside your address`})
