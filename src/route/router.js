@@ -19,7 +19,7 @@ router.put("/books/:bookId",authentication,authorization,updatedocutment)
 
 router.get("/books/:bookId",authentication,getBookById)
 
-router.delete("/books/:bookId",authentication,deleteBookById)
+router.delete("/books/:bookId",authentication,authorization,deleteBookById)
 
 //=====================================================Book========================================================================
 router.post("/books/:bookId/review",addReview)
