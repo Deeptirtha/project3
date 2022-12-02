@@ -49,7 +49,7 @@ const addReview = async (req, res) => {
    let Newupdate = await bookModel.findById(bookId).lean()
     Newupdate.review=reviewData
 
-    res.status(201).send({ status: true, message: "Revied Updated Successfully", data: Newupdate })
+    res.status(201).send({ status: true, message: "Review created Successfully", data: Newupdate })
   } catch (err) {
     res.status(500).send({ status: false, error: err.message });
   }
