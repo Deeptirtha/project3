@@ -29,7 +29,7 @@ let creatUser = async function (req, res) {
     if (!data.password.trim() || !validPass.test(data.password)) { return res.status(400).send({status: false,message:"Password should be in-between 8-15 characters and must contain one of 0-9,A-Z,a-z and special character"})}
 
 if (data.hasOwnProperty("address")) {
- if (typeof(address)!== "object" ||typeof(address)== "string") {return res.status(400).send({ status: true, msg: "please put address in object format" })}
+ if (typeof(address)!== "object") {return res.status(400).send({ status: true, msg: "please put address in object format" })}
      
  if (Object.keys(address).length == 0) {return res.status(400).send({ status: true, msg: "address can't be empty" })}
 
