@@ -21,7 +21,9 @@ const addReview = async (req, res) => {
    
 
     if(data.hasOwnProperty("reviewedAt")){
-     return  res.status(400).send({ status: false, message: "you cant change the date manually app bhagwan banne ki kosish na kare " })
+      let visitDate = new Date().toISOString().split('T')[0]
+      if(reviewedAt.trim()!=visitDate){
+     return  res.status(400).send({ status: false, message: `Dont try to be omnipotent put correct date which is ${visitDate} ` })}
   }
     if(data.hasOwnProperty("reviewedBy")){
       data.reviewedBy=data.reviewedBy.trim()
