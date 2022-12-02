@@ -40,7 +40,7 @@ const ValidISBN = function (ISBN) {
     return regexISBN.test(ISBN);
 };
   
-   //============================================Validations :  category =======================================================
+//============================================Validations :  category ==========================================================
    const validcategory = function (category) {
     const regexcategory =/[a-zA-z]/;
       return regexcategory.test(category);

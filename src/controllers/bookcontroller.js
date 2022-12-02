@@ -37,10 +37,10 @@ const createBooks = async function (req, res) {
       if (duplicateISBN) return res.status(400).send({ status: false, message: "ISBN is already registered!" })
 
       if (!category) return res.status(400).send({ status: false, message: "Please Provide Category" })
-      if (!validator.validcategory(category)) return res.status(400).send({ status: false, message: "please provide category string" })
+      if (!validator.validcategory(category)) return res.status(400).send({ status: false, message: "please provide category in string" })
 
       if (!subcategory) return res.status(400).send({ status: false, message: "Please Provide Subcategory" })
-      if (!validator.validName(subcategory)) return res.status(400).send({ status: false, message: "please provide subcategory string" })
+      if (!validator.validName(subcategory.trim())) return res.status(400).send({ status: false, message: "please provide subcategory in string" })
 
       if (!releasedAt) return res.status(400).send({ status: false, message: "Please Provide releasedAt" })
       if (!validator.validTime(releasedAt.trim())) return res.status(400).send({ status: false, message: "Please enter releasedAt in the right format(YYYY-MM-DD)!" })
