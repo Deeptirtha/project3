@@ -31,7 +31,7 @@ router.delete('/books/:bookId/review/:reviewId',deleteReviewById)
 //=================================================================404==============================================================
 
 router.all("/*", function (req, res) {
-res.status(404).send({status: false,msg: "Galat api me ayela bhidu"})})
+res.status(404).send({status: false,msg: "Wrong api please try different"})})
   
 
 
