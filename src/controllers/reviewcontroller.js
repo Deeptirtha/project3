@@ -34,7 +34,7 @@ const addReview = async (req, res) => {
     if(data.hasOwnProperty("review")){
     data.review= data.review.trim()
     if (!(data.review)) {
-      return res.status(400).send({ status: false, message: "Enter valid data in review" })
+      return res.status(400).send({ status: false, message: "Enter valid data in review you can't put empty srting" })
     }}
     if((rating > 5 ) || (rating < 1)) return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 numbers" });
 
