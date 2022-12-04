@@ -38,7 +38,7 @@ const addReview = async (req, res) => {
     if (!(data.review)) {
       return res.status(400).send({ status: false, message: "Enter valid data in review you can't put empty srting" })
     }}
-    if((rating > 5 ) || (rating < 1)) return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 numbers" });
+    if((rating > 5 ) || (rating < 1) || typeof(rating)!="number") return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 in numbers" });
 
     if(!IsNumeric(rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}
   
@@ -93,7 +93,7 @@ if(data.hasOwnProperty("reviewedAt") || data.hasOwnProperty("bookId") || data.ha
 }}
 
 if(data.hasOwnProperty("rating")){
-if((data.rating > 5 ) || (data.rating < 1)) return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 numbers" })}
+if((data.rating > 5 ) || (data.rating < 1)|| typeof(data.rating)!="number") return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 in numbers" })}
 
 if(!IsNumeric(data.rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}
 
