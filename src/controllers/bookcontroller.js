@@ -114,9 +114,9 @@ const updatedocutment = async function (req, res) {
 
     if (Object.keys(bodydata).length == 0) return res.status(400).send({ satus: false, message: "for updation data is required" })
 
-    if (!validator.validTitleBooks(title)) return res.status(400).send({ status: false, message: "provide title in string" })
+    if (!validator.validTitleBooks(title)) return res.status(400).send({ status: false, message: "provide title in string you and you can't put empty string also" })
 
-    if (!validator.validName(excerpt)) return res.status(400).send({ status: false, message: "provide excerpt is string" })
+    if (!validator.validName(excerpt)) return res.status(400).send({ status: false, message: "provide excerpt is string and you can't put empty string also" })
 
     if (bodydata.hasOwnProperty("releasedAt")) {
 
