@@ -23,7 +23,7 @@ const addReview = async (req, res) => {
     if(data.hasOwnProperty("reviewedAt")){
       let visitDate = new Date().toISOString().split('T')[0]
       if(reviewedAt.trim()!=visitDate){
-     return  res.status(400).send({ status: false, message: `Dont try to be omnipotent put correct date which is ${visitDate} ` })}
+     return  res.status(400).send({ status: false, message: `Input correct date which is ${visitDate} ` })}
   }
     if(data.hasOwnProperty("reviewedBy")){
       data.reviewedBy=data.reviewedBy.trim()
@@ -32,6 +32,8 @@ const addReview = async (req, res) => {
     if(!rating) return res.status(400).send({ status: false, message: "Rating is required and should not be 0" })
 
     if(data.hasOwnProperty("review")){
+      
+    if(typeof(data.review)!="string") {return res.status(400).send({ status: false, message: "Enter valid data in review in srting format" })}
     data.review= data.review.trim()
     if (!(data.review)) {
       return res.status(400).send({ status: false, message: "Enter valid data in review you can't put empty srting" })
@@ -45,8 +47,7 @@ const addReview = async (req, res) => {
 
  
     let reviewData = await reviedModel.create(data) ;
-   await bookModel.updateOne({_id: bookId},{$inc: {reviews: 1}})
-   let Newupdate = await bookModel.findById(bookId).lean()
+    let Newupdate=  await bookModel.findOneAndUpdate ({_id: bookId},{$inc: {reviews: 1}},{new:true}).lean()
     Newupdate.review=reviewData
 
     res.status(201).send({ status: true, message: "Review created Successfully", data: Newupdate })

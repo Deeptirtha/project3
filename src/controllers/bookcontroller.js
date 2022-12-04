@@ -68,15 +68,15 @@ const getBookData = async function (req, res) {
   
       if (!Id) {
         let result = await bookModel.find(data).select({ _id: 1, title: 1, excerpt: 1, userId: 1, category: 1,subcategory:1, reviews: 1, releasedAt: 1, }).sort({ title: 1 })
-        if (result.length < 1) { res.status(404).send({ status: false, msg: "No book found" }) }
-        else { res.status(200).send({ status: true, msg: result }) }
+        if (result.length < 1) {return res.status(404).send({ status: false, msg: "No book found" }) }
+        else {return res.status(200).send({ status: true, msg: result }) }
       }
       else {
       
         if (!isValidObjectId(Id)) { return res.status(400).send({ status: false, msg: "user id is not valid" }) }
         let result = await bookModel.find(data).select({ _id: 1, title: 1, excerpt: 1, userId: 1, category: 1,subcategory:1, reviews: 1, releasedAt: 1, }).sort({ title: 1 })
-        if (result.length == 0) { res.status(404).send({ status: false, msg: "no book found" }) }
-        else { res.status(200).send({ status: true, msg: result }) }
+        if (result.length == 0) {return res.status(404).send({ status: false, msg: "no book found" }) }
+        else {return  res.status(200).send({ status: true, msg: result }) }
       }
     }
   
