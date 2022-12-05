@@ -26,7 +26,7 @@ let creatUser = async function (req, res) {
 
     if (!data.phone.trim() || !validMobile.test(data.phone.trim())) {return res.status(400).send({ status: false, message: "enter a valid phone No" })}
 
-    if (!data.password.trim() || !validPass.test(data.password)) { return res.status(400).send({status: false,message:"Password should be in-between 8-15 characters and must contain one of 0-9,A-Z,a-z and special character"})}
+    if (!data.password.trim() || !validPass.test(data.password.trim())) { return res.status(400).send({status: false,message:"Password should be in-between 8-15 characters and must contain one of 0-9,A-Z,a-z and special character"})}
 
 if (data.hasOwnProperty("address")) {
  if (typeof(address)!== "object") {return res.status(400).send({ status: true, msg: "please put address in object format" })}

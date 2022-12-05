@@ -93,9 +93,9 @@ if(data.hasOwnProperty("reviewedAt") || data.hasOwnProperty("bookId") || data.ha
 }}
 
 if(data.hasOwnProperty("rating")){
-if((data.rating > 5 ) || (data.rating < 1)|| typeof(data.rating)!="number") return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 in numbers" })}
+if((data.rating > 5 ) || (data.rating < 1)|| typeof(data.rating)!="number") return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 in numbers" })
 
-if(!IsNumeric(data.rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}
+if(!IsNumeric(data.rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}}
 
 let updatedReview=await reviedModel.findOneAndUpdate({_id : reviewId,bookId:bookId},data, {new:true})
 

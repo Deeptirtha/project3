@@ -76,7 +76,7 @@ const getBookData = async function (req, res) {
         if (!isValidObjectId(Id)) { return res.status(400).send({ status: false, msg: "user id is not valid" }) }
         let result = await bookModel.find(data).select({ _id: 1, title: 1, excerpt: 1, userId: 1, category: 1,subcategory:1, reviews: 1, releasedAt: 1, }).sort({ title: 1 })
         if (result.length == 0) {return res.status(404).send({ status: false, msg: "no book found" }) }
-        else {return  res.status(200).send({ status: true, msg: result }) }
+        else {return  res.status(200).send({ status: true,  message: 'Books list', data: result }) }
       }
     }
   
@@ -94,7 +94,7 @@ let getBookById= async function(req,res){
     if(!book){return res.status(404).send({status:false,msg:"no book found or book already deleted"})}
     let reviews=await reviedModel.find({bookId:req.params.bookId}).select({bookId:1, reviewedBy:1, reviewedAt:1, rating:1, review:1})
     book.reviewsData=reviews
-    res.status(400).send({status:true,msg:book})
+    res.status(200).send({status:true,  message: 'Books list',data:book})
 
   }
   catch (err) {
@@ -156,7 +156,7 @@ const updatedocutment = async function (req, res) {
   } catch (err) { return res.status(500).send({ status: false, message: "server error", Error: err.message }) }
 }
 
-//================================================================Delete-by-Id=====================================================
+//================================================================Delete-by-Id==========================================================
 const deleteBookById = async function (req, res) {
   try {
       const bookId = req.params.bookId
