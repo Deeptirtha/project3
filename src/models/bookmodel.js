@@ -10,6 +10,10 @@ const bookSchema = new mongoose.Schema({
         unique: true,
         trim:true
     },
+    bookCover:{
+        type:String,
+        trim:true
+    },
     excerpt: {
         type: String,
         required: true,

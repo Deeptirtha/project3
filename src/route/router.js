@@ -4,6 +4,8 @@ const {creatUser,loginUser}=require("../controllers/usercontroller")
 const {createBooks,getBookData, getBookById, deleteBookById,updatedocutment}=require("../controllers/bookcontroller")
 const {addReview, updeteRewvied, deleteReviewById}= require("../controllers/reviewcontroller")
 const  { authentication, authorization }=require("../middleware/auth")
+const bookModel = require("../models/bookmodel");
+const mongoose = require("mongoose");
 const aws= require("aws-sdk")
 
 
@@ -39,8 +41,8 @@ aws.config.update({
     
     let uploadFile= async ( file) =>{
         return new Promise( function(resolve, reject) {
-            // this function will upload file to aws and return the link
-            let s3= new aws.S3({apiVersion: '2006-03-01'}); // we will be using the s3 service of aws
+           
+            let s3= new aws.S3({apiVersion: '2006-03-01'}); 
             
             var uploadParams= {
                 ACL: "public-read",
@@ -59,22 +61,24 @@ aws.config.update({
                 return resolve(data.Location)
             })
             
-            // let data= await s3.upload( uploadParams)
-            // if( data) return data.Location
-        // else return "there is an error"
         
     })
 }
 
-router.post("/write-file-aws", async function(req, res){
+router.post("/write-file-aws/:id", async function(req, res){
     
     try{
         let files= req.files
+        const book=req.params.id;
         if(files && files.length>0){
-            //upload to s3 and get the uploaded link
-            // res.send the link back to frontend/postman
+           
             let uploadedFileURL= await uploadFile( files[0] )
-            res.status(201).send({msg: "file uploaded succesfully", data: uploadedFileURL})
+
+            const bookid = await bookModel.findById({_id:book}).lean()
+
+            bookid.bookCover=uploadedFileURL
+
+            res.status(201).send({msg: "file uploaded succesfully", data:bookid})
         }
         else{
             res.status(400).send({ msg: "No file found" })
