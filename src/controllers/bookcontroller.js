@@ -4,12 +4,13 @@ let reviedModel=require("../models/reviedmodel")
 const mongoose = require("mongoose");
 const validator = require("../validation/valid")
 const { isValidObjectId } = require("mongoose")
-
+const  { uploadFile }=require("../aws")
 //========================================================creating-book=======================================================
 const createBooks = async function (req, res) {
   try {
 
       data = req.body;
+      files=req.files
 
       const { title, excerpt, ISBN, category, subcategory, releasedAt,userId ,isDeleted } = data;
     
@@ -49,6 +50,10 @@ const createBooks = async function (req, res) {
 
       let user=await userModel.findById(data.userId)
       if(!user){return res.status(404).send({satus:false,msg:"user is not present in database"})}
+
+
+      let url = await uploadFile(files[0])
+      data.bookCover = url;
 
 
       const bookCreation = await bookModel.create(data)
