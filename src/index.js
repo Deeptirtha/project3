@@ -1,7 +1,11 @@
 const express = require("express");
 const route = require("./route/router.js");
 const mongoose = require("mongoose");
+const multer = require("multer");
 const app = express();
+
+app.use(multer().any());
+
 app.use(express.json());
 
 mongoose

@@ -15,7 +15,7 @@ let creatUser = async function (req, res) {
     const { street, city, pincode } = address;
     data.title = data.title.trim()
 
-    if (!name.trim() || !validName.test(name.trim())) { return res.status(400).send({ status: false, message: "enter a valid name" }) }
+    if (!name || !validName.test(name.trim())) { return res.status(400).send({ status: false, message: "enter a valid name" }) }
 
     if (validTitle(data.title)) { return res.status(400).send({ status: false, message: "enter a valid title" }) }
 
@@ -64,7 +64,7 @@ const loginUser = async function (req, res) {
         batch: "lithium",
         project: "BookManagement"
       },
-      "project3-group9", { expiresIn: '10h' }
+      "project3-group9", { expiresIn: '1h' }
     )
 
 
