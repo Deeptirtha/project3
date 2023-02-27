@@ -52,8 +52,8 @@ const createBooks = async function (req, res) {
       if(!user){return res.status(404).send({satus:false,msg:"user is not present in database"})}
 
 
-      let url = await uploadFile(files[0])
-      data.bookCover = url;
+      // let url = await uploadFile(files[0])
+      // data.bookCover = url;
 
 
       const bookCreation = await bookModel.create(data)

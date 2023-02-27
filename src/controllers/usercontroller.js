@@ -65,10 +65,10 @@ const loginUser = async function (req, res) {
       if (!data.hasOwnProperty("phone")) {return res.status(400).send({status: false,message: "please enter mobile no or email id to login"})}}
     if (!data.hasOwnProperty("password")) {return res.status(400).send({ status: false, message: "please enter password to login" })}
     let user = await UserModel.findOne({$or: [{ email: data.email, password: data.password },{ phone: data.phone, password: data.password }]});
-
+    let id=user._id
     if (!user) {return res.status(404).send({ status: false, msg: "no user found" })}
     let token = jwt.sign({ ID: user._id }, "project3-group9", {expiresIn: "10d"});
-    res.status(200).send({ status: true, message: token })}
+    res.status(200).send({ status: true, message: token ,id:id})}
      catch (err) {
     res.status(500).send({ status: false, msg: err.message })}
 };

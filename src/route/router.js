@@ -17,7 +17,8 @@ router.get("/books",authentication,getBookData)
 
 router.put("/books/:bookId",authentication,authorization,updatedocutment)
 
-router.get("/books/:bookId",authentication,getBookById)
+//router.get("/books/:bookId",authentication,getBookById)
+router.get("/books/:bookId",getBookById)
 
 router.delete("/books/:bookId",authentication,authorization,deleteBookById)
 
