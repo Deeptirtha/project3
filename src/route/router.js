@@ -15,12 +15,14 @@ router.post("/books",authentication,authorization,createBooks)
 
 router.get("/books",authentication,getBookData)
 
-router.put("/books/:bookId",authentication,authorization,updatedocutment)
+router.put("/books/:bookId",updatedocutment)
 
 //router.get("/books/:bookId",authentication,getBookById)
 router.get("/books/:bookId",getBookById)
 
-router.delete("/books/:bookId",authentication,authorization,deleteBookById)
+//router.delete("/books/:bookId",authentication,authorization,deleteBookById)
+
+router.delete("/books/:bookId",deleteBookById)
 
 //=====================================================Book========================================================================
 router.post("/books/:bookId/review",addReview)
@@ -28,6 +30,8 @@ router.post("/books/:bookId/review",addReview)
 router.put('/books/:bookId/review/:reviewId',updeteRewvied)
 
 router.delete('/books/:bookId/review/:reviewId',deleteReviewById)
+
+
 
 //=================================================================404==============================================================
 

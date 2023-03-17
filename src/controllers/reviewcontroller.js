@@ -15,6 +15,8 @@ const addReview = async (req, res) => {
     if(!checkBookId) return res.status(404).send({ status: false, message: "Book not found or already been deleted" });
 
     let data = req.body;
+
+    console.log(data,bookId)
   let {rating,reviewedAt}=data
 
   if(Object.keys(data).length==0) return res.status(400).send({ status: false, message: "Details required to add review for the book" })
@@ -32,7 +34,7 @@ const addReview = async (req, res) => {
     if(!rating) return res.status(400).send({ status: false, message: "Rating is required and should not be 0" })
 
     if(data.hasOwnProperty("review")){
-    data.review= data.review.trim()
+    data.review=data.review.trim()
     if (!(data.review)) {
       return res.status(400).send({ status: false, message: "Enter valid data in review" })
     }}
@@ -91,10 +93,10 @@ if(data.hasOwnProperty("reviewedAt") || data.hasOwnProperty("bookId") || data.ha
   return res.status(400).send({ status: false, message: "Enter valid data in review" })
 }}
 
-if(data.hasOwnProperty("rating")){
-if((data.rating > 5 ) || (data.rating < 1)) return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 numbers" })}
+// if(data.hasOwnProperty("rating")){
+// if((data.rating > 5 ) || (data.rating < 1)) return res.status(400).send({ status: false, message: "Rating should be between 1 - 5 numbers" })}
 
-if(!IsNumeric(data.rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}
+// if(!IsNumeric(data.rating)){return res.status(400).send({ status: false, message: "Please enter ratings in Number" })}
 
 let updatedReview=await reviedModel.findOneAndUpdate({_id : reviewId,bookId:bookId},data, {new:true})
 
@@ -111,6 +113,8 @@ const deleteReviewById = async function (req,res){
       let reviewId = req.params.reviewId
 
       let bookId = req.params.bookId
+
+      console.log(reviewId, bookId )
 
       if(!ValidObjectId(reviewId)){return res.status(400).send({status : false, Msg : "Enter Valid ObjectId for the Review"})}
 
